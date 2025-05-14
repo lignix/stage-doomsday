@@ -23,6 +23,12 @@ const timers = [
     endDate: "2025-08-15",
     image: "https://media.discordapp.net/attachments/1225159881766469822/1372302788826108004/Screenshot_20240328-085936.png?ex=68264811&is=6824f691&hm=a3adb407eb437f00db4c8242e712ab31168ab79280c9e6c6f928a4f955792a31&=&format=webp&quality=lossless"
   },
+  {
+    title: "ching chong",
+    startDate: "2025-05-19",
+    endDate: "2025-08-22",
+    image: "https://media.discordapp.net/attachments/1172504716379426947/1372310074835468398/image.png?ex=68264eda&is=6824fd5a&hm=fdf668238c277dff05f3c7e9f5c83fc11468d4770c51c3b41302b386c69c32da&=&format=webp&quality=lossless"
+  },
 ];
 
 
@@ -62,27 +68,56 @@ function renderTimers() {
   const container = document.getElementById("timers-container");
 
   timers.forEach(timer => {
-    const days = daysRemaining(timer.endDate);
-    const progress = getProgress(timer.startDate, timer.endDate);
-    const { elapsed, total } = getDayStats(timer.startDate, timer.endDate);
-
+    const now = new Date();
+    const start = new Date(timer.startDate);
+    const end = new Date(timer.endDate);
+    const daysUntilStart = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
+    const daysUntilEnd = Math.ceil((end - now) / (1000 * 60 * 60 * 24));
+  
     const card = document.createElement("div");
     card.className = "timer-card";
-
-    card.innerHTML = `
-      <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
-      <div class="timer-info">
-        <div class="timer-title">${timer.title}</div>
-        <div class="timer-days">${days >= 0 ? `${days} jours restants` : `Terminé ! force à vous autres :3`}</div>
-        <div class="progress-bar">
-          <div class="progress-fill" style="width: ${progress}%;"></div>
+  
+    // Cas 1 : Le timer n'a pas encore commencé
+    if (now < start) {
+      card.innerHTML = `
+        <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
+        <div class="timer-info">
+          <div class="timer-title">${timer.title}</div>
+          <div class="timer-before">Commence dans ${daysUntilStart} jour${daysUntilStart > 1 ? 's' : ''}</div>
         </div>
-        <div class="progress-percent">${progress}% — ${elapsed}/${total}</div>
-      </div>
-    `;
-
+      `;
+    } 
+    // Cas 2 : Le timer est terminé
+    else if (now > end) {
+      card.innerHTML = `
+        <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
+        <div class="timer-info">
+          <div class="timer-title">${timer.title}</div>
+          <div class="timer-days">Terminé ! force à vous autres :3</div>
+        </div>
+      `;
+    } 
+    // Cas 3 : Le timer est en cours
+    else {
+      const progress = getProgress(timer.startDate, timer.endDate);
+      const { elapsed, total } = getDayStats(timer.startDate, timer.endDate);
+  
+      card.innerHTML = `
+        <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
+        <div class="timer-info">
+          <div class="timer-title">${timer.title}</div>
+          <div class="timer-days">${daysUntilEnd} jours restants</div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${progress}%;"></div>
+          </div>
+          <div class="progress-percent">${progress}% — ${elapsed}/${total}</div>
+        </div>
+      `;
+    }
+  
     container.appendChild(card);
   });
+  
 }
 
 
