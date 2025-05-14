@@ -31,7 +31,6 @@ const timers = [
   },
 ];
 
-
 function daysRemaining(targetDate) {
   const today = new Date();
   const target = new Date(targetDate);
@@ -64,6 +63,15 @@ function getDayStats(startDate, endDate) {
   return { elapsed, total };
 }
 
+function formatDateFr(dateString) {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
 function renderTimers() {
   const container = document.getElementById("timers-container");
 
@@ -76,49 +84,43 @@ function renderTimers() {
   
     const card = document.createElement("div");
     card.className = "timer-card";
-  
+    let cardBody;
     // Cas 1 : Le timer n'a pas encore commencé
     if (now < start) {
-      card.innerHTML = `
-        <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
-        <div class="timer-info">
-          <div class="timer-title">${timer.title}</div>
-          <div class="timer-before">Commence dans ${daysUntilStart} jour${daysUntilStart > 1 ? 's' : ''}</div>
-        </div>
+      cardBody = `
+        <div class="timer-before">Commence dans ${daysUntilStart} jour${daysUntilStart > 1 ? 's' : ''}</div>
       `;
     } 
     // Cas 2 : Le timer est terminé
     else if (now > end) {
-      card.innerHTML = `
-        <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
-        <div class="timer-info">
-          <div class="timer-title">${timer.title}</div>
-          <div class="timer-days">Terminé ! force à vous autres :3</div>
-        </div>
+      cardBody = `
+        <div class="timer-days">Terminé ! force à vous autres :3</div>
       `;
     } 
     // Cas 3 : Le timer est en cours
     else {
       const progress = getProgress(timer.startDate, timer.endDate);
       const { elapsed, total } = getDayStats(timer.startDate, timer.endDate);
-  
-      card.innerHTML = `
-        <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
-        <div class="timer-info">
-          <div class="timer-title">${timer.title}</div>
-          <div class="timer-days">${daysUntilEnd} jours restants</div>
-          <div class="progress-bar">
-            <div class="progress-fill" style="width: ${progress}%;"></div>
-          </div>
-          <div class="progress-percent">${progress}% — ${elapsed}/${total}</div>
+      cardBody = `
+        <div class="timer-days">${daysUntilEnd} jours restants</div>
+        <div class="progress-bar">
+          <div class="progress-fill" style="width: ${progress}%;"></div>
         </div>
+        <div class="progress-percent">${progress}% — ${elapsed}/${total}</div>
+        <div class="timer-dates">${formatDateFr(timer.startDate)} – ${formatDateFr(timer.endDate)}</div>
       `;
     }
+
+    card.innerHTML = `
+      <div class="timer-card-background" style="background-image: url('${timer.image}')"></div>
+      <div class="timer-info">
+        <div class="timer-title">${timer.title}</div>
+        ${cardBody}
+      </div>
+      `;
   
     container.appendChild(card);
   });
-  
 }
-
 
 renderTimers();

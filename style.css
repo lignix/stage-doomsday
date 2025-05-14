@@ -54,6 +54,11 @@ h1 {
   font-weight: bold;
   color: #0f0;
 }
+.timer-dates{
+  margin-top: 5em;
+  font-size: 0.9rem;
+  color: #ddd;
+}
 .timer-before {
   padding-top:2rem;
   font-size: 1.2rem;
