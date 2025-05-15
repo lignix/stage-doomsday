@@ -75,6 +75,8 @@ function formatDateFr(dateString) {
 function renderTimers() {
   const container = document.getElementById("timers-container");
 
+  timers.sort((a, b) => new Date(a.endDate) - new Date(b.endDate));
+
   timers.forEach(timer => {
     const now = new Date();
     const start = new Date(timer.startDate);
