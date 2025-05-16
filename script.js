@@ -29,6 +29,12 @@ const timers = [
     endDate: "2025-08-22",
     image: "https://media.discordapp.net/attachments/1172504716379426947/1372310074835468398/image.png?ex=68264eda&is=6824fd5a&hm=fdf668238c277dff05f3c7e9f5c83fc11468d4770c51c3b41302b386c69c32da&=&format=webp&quality=lossless"
   },
+  {
+    title: "Gandhi",
+    startDate: "2025-05-07",
+    endDate: "2025-08-31",
+    image: "https://media.discordapp.net/attachments/1257764972973523048/1373019979192205342/Snapchat-788265944.png?ex=6828e400&is=68279280&hm=869482ce5c6087438342ebab66d87224f210a5537df6685f2c91fe89cac58859&=&format=webp&quality=lossless"
+  },
 ];
 
 function daysRemaining(targetDate) {
