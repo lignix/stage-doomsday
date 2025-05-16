@@ -15,25 +15,25 @@ const timers = [
     title: "Oleg chan >_<",
     startDate: "2025-05-19",
     endDate: "2025-08-28",
-    image: "https://cdn.discordapp.com/attachments/1257764972973523048/1372302968820334642/ezgif.com-video-to-gif-converter.gif?ex=6826483b&is=6824f6bb&hm=5ac1cf969ce7d611242eaedb16bade10f63a6950e888ec5f78c0e796c7639dd5&"
+    image: "./images/oleg.gif"
   },
   {
     title: "El racisto",
     startDate: "2025-05-14",
     endDate: "2025-08-15",
-    image: "https://media.discordapp.net/attachments/1225159881766469822/1372302788826108004/Screenshot_20240328-085936.png?ex=68264811&is=6824f691&hm=a3adb407eb437f00db4c8242e712ab31168ab79280c9e6c6f928a4f955792a31&=&format=webp&quality=lossless"
+    image: "./images/osaka.png"
   },
   {
     title: "ching chong",
     startDate: "2025-05-19",
     endDate: "2025-08-22",
-    image: "https://media.discordapp.net/attachments/1172504716379426947/1372310074835468398/image.png?ex=68264eda&is=6824fd5a&hm=fdf668238c277dff05f3c7e9f5c83fc11468d4770c51c3b41302b386c69c32da&=&format=webp&quality=lossless"
+    image: "./images/damn.png"
   },
   {
     title: "Gandhi",
     startDate: "2025-05-07",
     endDate: "2025-08-31",
-    image: "https://media.discordapp.net/attachments/1257764972973523048/1373019979192205342/Snapchat-788265944.png?ex=6828e400&is=68279280&hm=869482ce5c6087438342ebab66d87224f210a5537df6685f2c91fe89cac58859&=&format=webp&quality=lossless"
+    image: "./images/gandhi.png"
   },
 ];
 
